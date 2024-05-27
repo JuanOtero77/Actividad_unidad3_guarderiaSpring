@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://wwthymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <header th:replace="plantillas/partes :: cabecero"></header>
+        <h2>PAGINA INICIO</h2>
+        <a th:href="@{/agregar}">AGREGAR USUARIOS</a>
+        <h4>LISTA DE USUARIOS</h4>
+        <hr>
+        <div th:if="${usuarios != null and !usuarios.empty}">
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>CLAVE</th>
+                    <th>NOMBRE</th>
+                    <th>CORREO</th>
+                    <th>ROL</th>
+                    <th>EDITAR</th>
+                    <th>ELIMINAR</th>
+                </tr>
+                <tr th:each="u: ${usuarios}">
+                    <td th:text="${u.id}"></td>
+                    <td th:text="${u.clave}"></td>
+                    <td th:text="${u.nombre}"></td>
+                    <td th:text="${u.correo}"></td>
+                    <td th:text="${u.rol}"></td>
+                    <td><a th:href="@{/editar/}+${u.id}" th:text="EDITAR"></a></td>
+                    <td><a th:href="@{/eliminar/}+${u.id}" th:text="ELIMINAR"></a></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${usuarios == null or usuarios.empty}">
+            La lista de usuarios esta vacia
+        </div>
+        <footer th:replace="plantillas/partes :: pie"></footer>
+    </body>
+</html>
